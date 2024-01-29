@@ -1,4 +1,8 @@
 ﻿namespace Contacts.Maui;
+
+using Contacts.Maui.Repositories;
+using Contacts.Maui.Views;
+
 using Microsoft.Extensions.Logging;
 
 public static class MauiProgram
@@ -14,8 +18,11 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
+        builder.Services.AddSingleton<ContactsPage>();
+        builder.Services.AddSingleton<IContactsRepository, ContactsRepository>();
+
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
         return builder.Build();

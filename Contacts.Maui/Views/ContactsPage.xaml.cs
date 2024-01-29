@@ -1,41 +1,39 @@
 namespace Contacts.Maui.Views;
 
+using Contacts.Maui.Models;
+using Contacts.Maui.Repositories;
+
 public partial class ContactsPage : ContentPage
 {
-    public ContactsPage()
+    public ContactsPage(IContactsRepository contactsRepository)
     {
         InitializeComponent();
 
-        List<Contact> contacts = new()
-        {
-            new Contact("First Contact", "First Email"),
-            new Contact("Second Contact", "Second Email"),
-            new Contact("Third Contact", "Third Email"),
-        };
+        List<ContactModel> contacts = contactsRepository.GetAll();
 
         listContacts.ItemsSource = contacts;
     }
-
-    private void btnAddContact_Clicked(object sender, EventArgs e)
+    private async void listContacts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        Shell.Current.GoToAsync(nameof(AddContactPage));
-    }
-
-    private void btnEditContact_Clicked(object sender, EventArgs e)
-    {
-        Shell.Current.GoToAsync(nameof(EditContactPage));
-    }
-
-    public class Contact
-    {
-        public Contact(string name, string email)
+        if (listContacts.SelectedItem != null)
         {
-            this.Name = name;
-            this.Email = email;
+            //DisplayAlert("Test", $"Item selected {e.SelectedItem}", "OK");
+            await Shell.Current.GoToAsync(nameof(EditContactPage));
         }
+    }
 
-        public string Name { get; init; }
+    private void listContacts_ItemTapped(object sender, ItemTappedEventArgs e)
+    {
+        listContacts.SelectedItem = null;
+    }
 
-        public string Email { get; init; }
+    private async void btnAddContact_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(AddContactPage));
+    }
+
+    private async void btnEditContact_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(EditContactPage));
     }
 }
