@@ -1,10 +1,19 @@
 namespace Contacts.Maui.Views;
 
+using Contacts.Maui.Models;
+using Contacts.Maui.Repositories;
+
+[QueryProperty(nameof(ContactId), "Id")]
 public partial class EditContactPage : ContentPage
 {
-    public EditContactPage()
+    private readonly IContactsRepository contactsRepository;
+    private ContactModel? contactModel;
+
+    public EditContactPage(IContactsRepository contactsRepository)
     {
         InitializeComponent();
+
+        this.contactsRepository = contactsRepository;
     }
 
     private void btnCancel_Clicked(object sender, EventArgs e)
@@ -13,5 +22,14 @@ public partial class EditContactPage : ContentPage
         //https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/shell/navigation?view=net-maui-8.0
 
         Shell.Current.GoToAsync($"//{nameof(ContactsPage)}");
+    }
+
+    public string ContactId
+    {
+        set
+        {
+            this.contactModel = this.contactsRepository.GetContactById(int.Parse(value));
+            lblName.Text = this.contactModel!.Name;
+        }
     }
 }

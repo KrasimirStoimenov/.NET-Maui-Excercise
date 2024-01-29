@@ -19,6 +19,8 @@ public static class MauiProgram
             });
 
         builder.Services.AddSingleton<ContactsPage>();
+        builder.Services.AddSingleton<AddContactPage>();
+        builder.Services.AddSingleton<EditContactPage>();
         builder.Services.AddSingleton<IContactsRepository, ContactsRepository>();
 
 #if DEBUG
