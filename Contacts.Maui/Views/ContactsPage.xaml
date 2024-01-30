@@ -31,10 +31,5 @@
             Clicked="btnAddContact_Clicked" 
             Text="Add Contact">
         </Button>
-        <Button 
-            x:Name="btnEditContact" 
-            Clicked="btnEditContact_Clicked" 
-            Text="Edit Contact">
-        </Button>
     </VerticalStackLayout>
 </ContentPage>

@@ -6,9 +6,9 @@ public sealed class ContactsRepository : IContactsRepository
 {
     private readonly List<ContactModel> contacts = new()
     {
-        new ContactModel(1,"First Contact", "First Email"),
-        new ContactModel(2, "Second Contact", "Second Email"),
-        new ContactModel(3, "Third Contact", "Third Email"),
+        new ContactModel(1,"First Contact", "First@email.com", "123456789", "FirstAddress"),
+        new ContactModel(2, "Second Contact", "Second@email.com", "987654321", "SecondAddress"),
+        new ContactModel(3, "Third Contact", "Third@email.com", "147258396",  "ThirdAddress"),
     };
 
     public List<ContactModel> GetAll()

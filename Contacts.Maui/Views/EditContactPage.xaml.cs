@@ -1,13 +1,11 @@
 namespace Contacts.Maui.Views;
 
-using Contacts.Maui.Models;
 using Contacts.Maui.Repositories;
 
 [QueryProperty(nameof(ContactId), "Id")]
 public partial class EditContactPage : ContentPage
 {
     private readonly IContactsRepository contactsRepository;
-    private ContactModel? contactModel;
 
     public EditContactPage(IContactsRepository contactsRepository)
     {
@@ -28,8 +26,15 @@ public partial class EditContactPage : ContentPage
     {
         set
         {
-            this.contactModel = this.contactsRepository.GetContactById(int.Parse(value));
-            lblName.Text = this.contactModel!.Name;
+            var contactModel = this.contactsRepository.GetContactById(int.Parse(value));
+            if (contactModel != null)
+            {
+                lblName.Text = contactModel.Name;
+                entryName.Text = contactModel.Name;
+                entryEmail.Text = contactModel.Email;
+                entryPhoneNumber.Text = contactModel.PhoneNumber;
+                entryAddress.Text = contactModel.Address;
+            }
         }
     }
 }
