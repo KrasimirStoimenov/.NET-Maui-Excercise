@@ -1,18 +1,28 @@
 namespace Contacts.Maui.Views;
 
+using System.Collections.ObjectModel;
+
 using Contacts.Maui.Models;
 using Contacts.Maui.Repositories;
 
 public partial class ContactsPage : ContentPage
 {
+    private readonly IContactsRepository contactsRepository;
     public ContactsPage(IContactsRepository contactsRepository)
     {
         InitializeComponent();
 
-        List<ContactModel> contacts = contactsRepository.GetAll();
-
-        listContacts.ItemsSource = contacts;
+        this.contactsRepository = contactsRepository;
     }
+
+    protected override void OnAppearing()
+    {
+        var contacts = new ObservableCollection<ContactModel>(this.contactsRepository.GetAll());
+        listContacts.ItemsSource = contacts;
+
+        base.OnAppearing();
+    }
+
     private async void listContacts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         if (listContacts.SelectedItem != null)

@@ -15,5 +15,33 @@ public sealed class ContactsRepository : IContactsRepository
         => this.contacts.ToList();
 
     public ContactModel? GetContactById(int contactId)
-        => this.contacts.FirstOrDefault(x => x.ContactId == contactId);
+    {
+
+        var contact = this.contacts.FirstOrDefault(x => x.ContactId == contactId);
+        if (contact != null)
+        {
+            //Returning new ContactModel cuz we are using InMemory collection and pass the contact by reference but we don't want this.
+            return new ContactModel(contact.ContactId, contact.Name, contact.Email, contact.PhoneNumber, contact.Address);
+        }
+
+        return null;
+    }
+
+    public void UpdateContact(int contactId, ContactModel contact)
+    {
+        if (contactId != contact.ContactId)
+        {
+            return;
+        }
+
+        var contactToUpdate = this.contacts.FirstOrDefault(x => x.ContactId == contactId);
+        if (contactToUpdate != null)
+        {
+            //TODO: Use AutoMapper
+            contactToUpdate.Name = contact.Name;
+            contactToUpdate.Email = contact.Email;
+            contactToUpdate.PhoneNumber = contact.PhoneNumber;
+            contactToUpdate.Address = contact.Address;
+        }
+    }
 }

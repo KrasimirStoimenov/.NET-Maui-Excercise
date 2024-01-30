@@ -36,6 +36,7 @@
             </HorizontalStackLayout>
         </Frame>
 
+        <Button x:Name="btnUpdate" Text="Update" Clicked="btnUpdate_Clicked"></Button>
         <Button x:Name="btnCancel" Text="Cancel" Clicked="btnCancel_Clicked"></Button>
     </VerticalStackLayout>
 </ContentPage>

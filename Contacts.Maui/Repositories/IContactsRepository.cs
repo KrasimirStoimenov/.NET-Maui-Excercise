@@ -7,4 +7,6 @@ public interface IContactsRepository
     public List<ContactModel> GetAll();
 
     public ContactModel? GetContactById(int contactId);
+
+    public void UpdateContact(int contactId, ContactModel contactModel);
 }

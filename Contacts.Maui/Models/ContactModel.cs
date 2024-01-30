@@ -13,13 +13,13 @@ public sealed record ContactModel
 
     public int ContactId { get; init; }
 
-    public string Name { get; init; }
+    public string Name { get; set; }
 
-    public string Email { get; init; }
+    public string Email { get; set; }
 
-    public string PhoneNumber { get; init; }
+    public string PhoneNumber { get; set; }
 
-    public string Address { get; init; }
+    public string Address { get; set; }
 
     public override string ToString()
     {
