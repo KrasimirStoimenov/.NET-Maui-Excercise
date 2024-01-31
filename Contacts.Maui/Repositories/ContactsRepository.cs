@@ -27,6 +27,9 @@ public sealed class ContactsRepository : IContactsRepository
         return null;
     }
 
+    public void AddContact(ContactModel contact)
+        => this.contacts.Add(contact);
+
     public void UpdateContact(int contactId, ContactModel contact)
     {
         if (contactId != contact.ContactId)
@@ -44,4 +47,7 @@ public sealed class ContactsRepository : IContactsRepository
             contactToUpdate.Address = contact.Address;
         }
     }
+
+    public int GetMaxIdValue()
+        => this.contacts.Max(x => x.ContactId);
 }

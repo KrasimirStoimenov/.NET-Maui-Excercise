@@ -8,5 +8,9 @@ public interface IContactsRepository
 
     public ContactModel? GetContactById(int contactId);
 
-    public void UpdateContact(int contactId, ContactModel contactModel);
+    public void AddContact(ContactModel contact);
+
+    public void UpdateContact(int contactId, ContactModel contact);
+
+    public int GetMaxIdValue();
 }

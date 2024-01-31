@@ -58,17 +58,11 @@
 
 	<ItemGroup>
 	  <AndroidResource Remove="Views\NewFolder1\**" />
-	  <AndroidResource Remove="Views\NewFolder\**" />
 	  <Compile Remove="Views\NewFolder1\**" />
-	  <Compile Remove="Views\NewFolder\**" />
 	  <EmbeddedResource Remove="Views\NewFolder1\**" />
-	  <EmbeddedResource Remove="Views\NewFolder\**" />
 	  <MauiCss Remove="Views\NewFolder1\**" />
-	  <MauiCss Remove="Views\NewFolder\**" />
 	  <MauiXaml Remove="Views\NewFolder1\**" />
-	  <MauiXaml Remove="Views\NewFolder\**" />
 	  <None Remove="Views\NewFolder1\**" />
-	  <None Remove="Views\NewFolder\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -83,6 +77,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ContactsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Control\ContactControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\EditContactPage.xaml">

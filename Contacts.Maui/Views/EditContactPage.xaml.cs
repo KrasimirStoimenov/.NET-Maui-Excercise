@@ -15,41 +15,30 @@ public partial class EditContactPage : ContentPage
 
         this.contactsRepository = contactsRepository;
     }
-
-    private void btnUpdate_Clicked(object sender, EventArgs e)
+    public string ContactId
     {
-        if (nameValidator.IsNotValid)
+        set
         {
-            DisplayAlert("Error", "Name is required", "OK");
-            return;
+            this.contact = this.contactsRepository.GetContactById(int.Parse(value));
+            if (contact != null)
+            {
+                contactControl.Name = contact.Name;
+                contactControl.Name = contact.Name;
+                contactControl.Email = contact.Email;
+                contactControl.PhoneNumber = contact.PhoneNumber;
+                contactControl.Address = contact.Address;
+            }
         }
+    }
 
-        if (emailValidator.IsNotValid)
-        {
-            var errorsJoined = string.Join("\n", emailValidator.Errors!);
-            DisplayAlert("Error", errorsJoined, "OK");
-            return;
-        }
-
-        if (phoneNumberValidator.IsNotValid)
-        {
-            DisplayAlert("Error", "Phone number is required", "OK");
-            return;
-        }
-
-
-        if (addressValidator.IsNotValid)
-        {
-            DisplayAlert("Error", "Address is required", "OK");
-            return;
-        }
-
+    private void contactControl_OnSave(object sender, EventArgs e)
+    {
         if (this.contact != null)
         {
-            this.contact.Name = entryName.Text;
-            this.contact.Email = entryEmail.Text;
-            this.contact.PhoneNumber = entryPhoneNumber.Text;
-            this.contact.Address = entryAddress.Text;
+            this.contact.Name = contactControl.Name;
+            this.contact.Email = contactControl.Email;
+            this.contact.PhoneNumber = contactControl.PhoneNumber;
+            this.contact.Address = contactControl.Address;
 
             this.contactsRepository.UpdateContact(this.contact.ContactId, this.contact);
         }
@@ -58,7 +47,7 @@ public partial class EditContactPage : ContentPage
         Shell.Current.GoToAsync("..");
     }
 
-    private void btnCancel_Clicked(object sender, EventArgs e)
+    private void contactControl_OnCancel(object sender, EventArgs e)
     {
         // For the Shell page (Main page, Index page etc..) if we want to route it we should you absolute path. And absolute path starts with //
         //https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/shell/navigation?view=net-maui-8.0
@@ -66,19 +55,9 @@ public partial class EditContactPage : ContentPage
         Shell.Current.GoToAsync($"//{nameof(ContactsPage)}");
     }
 
-    public string ContactId
+    private void contactControl_OnError(object sender, List<string> errors)
     {
-        set
-        {
-            this.contact = this.contactsRepository.GetContactById(int.Parse(value));
-            if (contact != null)
-            {
-                lblName.Text = contact.Name;
-                entryName.Text = contact.Name;
-                entryEmail.Text = contact.Email;
-                entryPhoneNumber.Text = contact.PhoneNumber;
-                entryAddress.Text = contact.Address;
-            }
-        }
+        var joinedValidationErrors = string.Join("\n", errors);
+        DisplayAlert("Error", joinedValidationErrors, "OK");
     }
 }
