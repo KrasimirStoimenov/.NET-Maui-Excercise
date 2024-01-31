@@ -18,6 +18,32 @@ public partial class EditContactPage : ContentPage
 
     private void btnUpdate_Clicked(object sender, EventArgs e)
     {
+        if (nameValidator.IsNotValid)
+        {
+            DisplayAlert("Error", "Name is required", "OK");
+            return;
+        }
+
+        if (emailValidator.IsNotValid)
+        {
+            var errorsJoined = string.Join("\n", emailValidator.Errors!);
+            DisplayAlert("Error", errorsJoined, "OK");
+            return;
+        }
+
+        if (phoneNumberValidator.IsNotValid)
+        {
+            DisplayAlert("Error", "Phone number is required", "OK");
+            return;
+        }
+
+
+        if (addressValidator.IsNotValid)
+        {
+            DisplayAlert("Error", "Address is required", "OK");
+            return;
+        }
+
         if (this.contact != null)
         {
             this.contact.Name = entryName.Text;
