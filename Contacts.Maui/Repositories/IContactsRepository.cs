@@ -14,5 +14,7 @@ public interface IContactsRepository
 
     public void DeleteContact(int contactId);
 
+    public List<ContactModel> SearchContacts(string filterText);
+
     public int GetMaxIdValue();
 }

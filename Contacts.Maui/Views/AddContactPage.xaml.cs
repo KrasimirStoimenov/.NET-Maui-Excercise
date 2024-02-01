@@ -15,10 +15,10 @@ public partial class AddContactPage : ContentPage
 
     protected override void OnAppearing()
     {
-        contactControl.Name = null;
-        contactControl.Email = null;
-        contactControl.PhoneNumber = null;
-        contactControl.Address = null;
+        contactControl.Name = string.Empty;
+        contactControl.Email = string.Empty;
+        contactControl.PhoneNumber = string.Empty;
+        contactControl.Address = string.Empty;
 
         base.OnAppearing();
     }

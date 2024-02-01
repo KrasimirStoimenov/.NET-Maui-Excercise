@@ -56,6 +56,49 @@ public sealed class ContactsRepository : IContactsRepository
         }
     }
 
+    public List<ContactModel> SearchContacts(string filterText)
+    {
+
+        var contacts = this.contacts
+            .Where(x => x.Name.Contains(filterText, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        if (contacts == null || contacts.Count == 0)
+        {
+            contacts = this.contacts
+                .Where(x => x.Email.Contains(filterText, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+        else
+        {
+            return contacts;
+        }
+
+        if (contacts == null || contacts.Count == 0)
+        {
+            contacts = this.contacts
+                .Where(x => x.PhoneNumber.Contains(filterText, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+        else
+        {
+            return contacts;
+        }
+
+        if (contacts == null || contacts.Count == 0)
+        {
+            contacts = this.contacts
+                .Where(x => x.Address.Contains(filterText, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+        else
+        {
+            return contacts;
+        }
+
+        return contacts;
+    }
+
     public int GetMaxIdValue()
         => this.contacts.Any() ? this.contacts.Max(x => x.ContactId) : 0;
 }
