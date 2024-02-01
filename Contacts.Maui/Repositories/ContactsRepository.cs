@@ -47,7 +47,15 @@ public sealed class ContactsRepository : IContactsRepository
             contactToUpdate.Address = contact.Address;
         }
     }
+    public void DeleteContact(int contactId)
+    {
+        var contact = this.contacts.FirstOrDefault(x => x.ContactId == contactId);
+        if (contact != null)
+        {
+            this.contacts.Remove(contact);
+        }
+    }
 
     public int GetMaxIdValue()
-        => this.contacts.Max(x => x.ContactId);
+        => this.contacts.Any() ? this.contacts.Max(x => x.ContactId) : 0;
 }

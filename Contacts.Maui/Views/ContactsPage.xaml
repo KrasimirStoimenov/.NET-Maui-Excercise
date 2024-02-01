@@ -22,6 +22,15 @@
                     <TextCell 
                         Text="{Binding Name}"
                         Detail="{Binding Email}">
+                        <TextCell.ContextActions>
+                            <MenuItem 
+                                Text="Delete" 
+                                IsDestructive="True"
+                                Clicked="Delete_Clicked"
+                                CommandParameter="{Binding .}"/>
+                                <!--'.' refered to current list item in ListView-->
+                                <!--We can just Bind ContactId {Binding ContactId} but for excercise will bind all model-->
+                        </TextCell.ContextActions>
                     </TextCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

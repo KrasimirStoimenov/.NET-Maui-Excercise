@@ -12,5 +12,7 @@ public interface IContactsRepository
 
     public void UpdateContact(int contactId, ContactModel contact);
 
+    public void DeleteContact(int contactId);
+
     public int GetMaxIdValue();
 }
